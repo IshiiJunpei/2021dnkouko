@@ -1,0 +1,19 @@
+#回転
+pdftk 01.pdf cat 1-3left output 011.pdf 
+
+#1〜4ページを抽出
+pdftk 02.pdf cat 1-4 output 021.pdf
+
+#表紙以外結合
+pdftk 01tobira.pdf blank.pdf 01.pdf 02tobira.pdf blank.pdf 02_01.pdf  02_02.pdf 02_03.pdf 02_04.pdf 02_05.pdf 03.pdf blank.pdf 03tobira.pdf blank.pdf 04.pdf 05.pdf cat output merge.pdf
+
+# ページ付番
+python3 pdftools.py -if merge.pdf -o merge_page.pdf --text \$page br 0.5 0.95 --overwrite
+
+# 表紙結合
+pdftk 00.pdf merge_page.pdf blank.pdf blank.pdf 99ura.pdf cat output merge_full.pdf
+
+
+
+
+
